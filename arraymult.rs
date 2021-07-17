@@ -12,21 +12,35 @@ fn vec_mult(x: &mut Vec<f64>, y: &Vec<f64>) {
 
 }
 
-fn main() {
+fn run_test() -> u128 {
     let t1 = Instant::now();
     const N: usize = 1e8 as usize;
     let mut v1: Vec<f64> = vec![0.0; N];
     let mut v2: Vec<f64> = vec![0.0; N];
-    println!("Time for allocation: {} ms", t1.elapsed().as_millis());
+    println!("   * Time for allocation: {} ms", t1.elapsed().as_millis());
 
     let t2 = Instant::now();
     for i in 0..(N-1) {
         v1[i] = i as f64;
         v2[i] = 2.0*i as f64;
     }
-    println!("Time to populate vectors: {} ms", t2.elapsed().as_millis());
+    println!("   * Time to populate vectors: {} ms", t2.elapsed().as_millis());
     
     let t3 = Instant::now();
     vec_mult(&mut v1, &mut v2);
-    println!("Time to multiply vectors: {} ms", t3.elapsed().as_millis());
+    println!("   * Time to multiply vectors: {} ms", t3.elapsed().as_millis());
+
+    return t1.elapsed().as_millis();
+}
+
+
+fn main() {
+    let mut ttot = 0;
+    for i in 0..5 {
+        println!("Test {}/{}", i+1, 5);
+        ttot += run_test();
+    }
+
+    let tmean = (ttot as f64)/5.0;
+    println!("Mean overall time = {} ms", tmean);
 }
