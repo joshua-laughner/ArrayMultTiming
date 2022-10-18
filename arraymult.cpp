@@ -39,6 +39,9 @@ int64_t array_test(int j) {
     auto dur34 = duration_cast<milliseconds>(t4 - t3);
     std::cout << "   * Multiplication time = " << dur34.count() << " ms" << std::endl;
 
+    // This seems necessary on some compilers, or they will optimize away the whole function
+    std::cout << " DEBUG: c[100] = " << c[100] << std::endl;
+
     free(a);
     free(b);
     free(c);

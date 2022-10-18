@@ -42,3 +42,12 @@ echo "============"
 echo ""
 
 julia arraymult.jl
+
+echo ""
+echo ""
+echo "============"
+echo "     R      "
+echo "============"
+echo ""
+
+Rscript arraymult.r
